@@ -16,3 +16,29 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+
+  db:
+    image: postgres:17-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - database_data:/var/lib/postgresql/data
+
+  phoenix:
+    image: arizephoenix/phoenix:4.0.0
+    ports:
+      - "6006:6006"   # UI + HTTP OTLP collector
+      - "4317:4317"   # gRPC OTLP collector
+    depends_on:
+      - db
+    environment:
+      - PHOENIX_SQL_DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
+
+volumes:
+  phoenix_data:
+    driver: local
+  database_data:
+    driver: local

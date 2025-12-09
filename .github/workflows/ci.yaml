@@ -1,0 +1,32 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.8.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Copy files to server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "mkdir -p ${{ secrets.DOCKER_COMPOSE_PATH }}"
+          rsync -avz --exclude '.git' ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DOCKER_COMPOSE_PATH }}
+
+      - name: Deploy with Docker Compose
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+            cd ${{ secrets.DOCKER_COMPOSE_PATH }} &&
+            docker compose pull &&
+            docker compose up -d --remove-orphans
+          "
