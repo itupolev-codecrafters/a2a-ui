@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { logErrorToBoundary } from '@/lib/error-handler';
@@ -26,8 +26,8 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    logErrorToBoundary(error, { 
-      componentStack: errorInfo.componentStack || 'No component stack available' 
+    logErrorToBoundary(error, {
+      componentStack: errorInfo.componentStack || 'No component stack available',
     });
   }
 
@@ -47,18 +47,15 @@ export class ErrorBoundary extends Component<Props, State> {
             <AlertTriangle className="h-16 w-16 text-destructive mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-2">Something went wrong</h2>
             <p className="text-muted-foreground mb-6">
-              An unexpected error occurred. Please try refreshing the page or contact support if the problem persists.
+              An unexpected error occurred. Please try refreshing the page or contact support if the
+              problem persists.
             </p>
             <div className="space-y-3">
               <Button onClick={this.handleRetry} className="w-full">
                 <RefreshCw className="h-4 w-4 mr-2" />
                 Try again
               </Button>
-              <Button 
-                variant="outline" 
-                onClick={() => window.location.reload()}
-                className="w-full"
-              >
+              <Button variant="outline" onClick={() => window.location.reload()} className="w-full">
                 Refresh page
               </Button>
             </div>
@@ -93,6 +90,6 @@ export const withErrorBoundary = <P extends object>(
   );
 
   WrappedComponent.displayName = `withErrorBoundary(${Component.displayName || Component.name})`;
-  
+
   return WrappedComponent;
-}; 
+};

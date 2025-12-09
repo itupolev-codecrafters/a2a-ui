@@ -45,24 +45,22 @@ export class ConfigurationError extends ApplicationError {
 // Error handling utilities
 export const handleError = (error: unknown, context?: string): AppError => {
   const contextPrefix = context ? `[${context}]` : '';
-  
+
   if (error instanceof ApplicationError) {
     logger.error(`${contextPrefix} Application error:`, error.toJSON());
     return error.toJSON();
   }
-  
+
   if (error instanceof Error) {
     const appError = new ApplicationError(error.message, 'GENERIC_ERROR');
     logger.error(`${contextPrefix} Generic error:`, appError.toJSON());
     return appError.toJSON();
   }
-  
-  const unknownError = new ApplicationError(
-    'An unknown error occurred',
-    'UNKNOWN_ERROR',
-    { originalError: String(error) }
-  );
-  
+
+  const unknownError = new ApplicationError('An unknown error occurred', 'UNKNOWN_ERROR', {
+    originalError: String(error),
+  });
+
   logger.error(`${contextPrefix} Unknown error:`, unknownError.toJSON());
   return unknownError.toJSON();
 };
@@ -89,4 +87,4 @@ export const logErrorToBoundary = (error: Error, errorInfo: { componentStack: st
     stack: error.stack,
     componentStack: errorInfo.componentStack,
   });
-}; 
+};

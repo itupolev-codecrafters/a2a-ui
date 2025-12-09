@@ -31,11 +31,8 @@ export function ThemeToggle() {
       {showDropdown && (
         <>
           {/* Backdrop */}
-          <div 
-            className="fixed inset-0 z-40" 
-            onClick={() => setShowDropdown(false)}
-          />
-          
+          <div className="fixed inset-0 z-40" onClick={() => setShowDropdown(false)} />
+
           {/* Dropdown */}
           <div className="absolute right-0 top-full mt-2 z-50 min-w-[120px] rounded-md border bg-background py-1 shadow-lg">
             {themes.map(({ value, label, icon: Icon }) => (
@@ -46,8 +43,8 @@ export function ThemeToggle() {
                   setShowDropdown(false);
                 }}
                 className={`flex w-full items-center px-3 py-2 text-sm hover:bg-muted transition-colors ${
-                  theme === value 
-                    ? 'bg-muted text-foreground' 
+                  theme === value
+                    ? 'bg-muted text-foreground'
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
@@ -60,4 +57,4 @@ export function ThemeToggle() {
       )}
     </div>
   );
-} 
+}

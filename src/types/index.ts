@@ -83,4 +83,4 @@ export interface StorageConfig {
   defaultValue: any;
   serialize?: (value: any) => string;
   deserialize?: (value: string) => any;
-} 
+}

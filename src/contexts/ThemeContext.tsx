@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
@@ -37,10 +37,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   // Update actual theme based on theme setting and system preference
   useEffect(() => {
     if (!isClient) return;
-    
+
     const updateActualTheme = () => {
       if (theme === 'system') {
-        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light';
         setActualTheme(systemTheme);
       } else {
         setActualTheme(theme);
@@ -60,15 +62,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   // Apply theme to document and save to localStorage
   useEffect(() => {
     if (!isClient || typeof window === 'undefined') return;
-    
+
     const root = document.documentElement;
-    
+
     // Remove previous theme classes
     root.classList.remove('light', 'dark');
-    
+
     // Add current theme class
     root.classList.add(actualTheme);
-    
+
     // Save to localStorage
     try {
       localStorage.setItem(THEME_STORAGE_KEY, theme);
@@ -90,4 +92,4 @@ export function useTheme() {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
-} 
+}

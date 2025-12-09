@@ -21,7 +21,7 @@ export interface JSONRPCMessage extends JSONRPCMessageIdentifier {
    * @default "2.0"
    * @const "2.0"
    */
-  jsonrpc?: "2.0";
+  jsonrpc?: '2.0';
 }
 
 /**
@@ -66,8 +66,7 @@ export interface JSONRPCError<Data = unknown | null, Code = number> {
 /**
  * Represents a JSON-RPC response object.
  */
-export interface JSONRPCResponse<R = unknown | null, E = unknown | null>
-  extends JSONRPCMessage {
+export interface JSONRPCResponse<R = unknown | null, E = unknown | null> extends JSONRPCMessage {
   /**
    * The result of the method invocation. Required on success.
    * Should be null or omitted if an error occurred.
@@ -90,13 +89,13 @@ export interface JSONRPCResponse<R = unknown | null, E = unknown | null>
  * @description An enumeration.
  */
 export type TaskState =
-  | "submitted"
-  | "working"
-  | "input-required"
-  | "completed"
-  | "canceled"
-  | "failed"
-  | "unknown";
+  | 'submitted'
+  | 'working'
+  | 'input-required'
+  | 'completed'
+  | 'canceled'
+  | 'failed'
+  | 'unknown';
 
 /**
  * Defines the authentication schemes and credentials for an agent.
@@ -328,12 +327,12 @@ export interface FileWithBytes {
    * Optional name of the file.
    */
   name?: string;
-  
+
   /**
    * Optional MIME type of the file content.
    */
   mimeType?: string;
-  
+
   /**
    * File content encoded as a Base64 string.
    */
@@ -348,12 +347,12 @@ export interface FileWithUri {
    * Optional name of the file.
    */
   name?: string;
-  
+
   /**
    * Optional MIME type of the file content.
    */
   mimeType?: string;
-  
+
   /**
    * URI pointing to the file content.
    */
@@ -367,7 +366,7 @@ export interface TextPart extends PartBase {
   /**
    * Part type - text for TextParts.
    */
-  kind: "text";
+  kind: 'text';
 
   /**
    * Text content.
@@ -382,7 +381,7 @@ export interface FilePart extends PartBase {
   /**
    * Part type - file for FileParts.
    */
-  kind: "file";
+  kind: 'file';
 
   /**
    * File content either as url or bytes.
@@ -397,7 +396,7 @@ export interface DataPart extends PartBase {
   /**
    * Part type - data for DataParts.
    */
-  kind: "data";
+  kind: 'data';
 
   /**
    * Structured data content.
@@ -456,7 +455,7 @@ export interface Message {
   /**
    * Message sender's role.
    */
-  role: "user" | "agent";
+  role: 'user' | 'agent';
 
   /**
    * Message content.
@@ -498,7 +497,7 @@ export interface Message {
   /**
    * Event type.
    */
-  kind: "message";
+  kind: 'message';
 }
 
 /**
@@ -650,12 +649,10 @@ export const ErrorCodeTaskNotCancelable = -32002;
 export type ErrorCodeTaskNotCancelable = typeof ErrorCodeTaskNotCancelable;
 /** Error code for Push Notification Not Supported (-32003). Push Notifications are not supported for this operation or agent. */
 export const ErrorCodePushNotificationNotSupported = -32003;
-export type ErrorCodePushNotificationNotSupported =
-  typeof ErrorCodePushNotificationNotSupported;
+export type ErrorCodePushNotificationNotSupported = typeof ErrorCodePushNotificationNotSupported;
 /** Error code for Unsupported Operation (-32004). The requested operation is not supported by the agent. */
 export const ErrorCodeUnsupportedOperation = -32004;
-export type ErrorCodeUnsupportedOperation =
-  typeof ErrorCodeUnsupportedOperation;
+export type ErrorCodeUnsupportedOperation = typeof ErrorCodeUnsupportedOperation;
 
 /**
  * Union of all well-known A2A and standard JSON-RPC error codes defined in this schema.
@@ -848,7 +845,7 @@ export interface AgentCardRequest extends JSONRPCRequest {
   /**
    * Method name for getting agent card.
    */
-  method: "agent/card";
+  method: 'agent/card';
   /**
    * Parameters for the agent card method (usually null).
    */
@@ -862,7 +859,7 @@ export interface SendMessageRequest extends JSONRPCRequest {
   /**
    * Method name for sending a message.
    */
-  method: "message/send";
+  method: 'message/send';
   /**
    * Parameters for the send message method.
    */
@@ -876,7 +873,7 @@ export interface SendTaskRequest extends JSONRPCRequest {
   /**
    * Method name for sending a task message.
    */
-  method: "message/stream";
+  method: 'message/stream';
   /**
    * Parameters for the send task method.
    */
@@ -890,7 +887,7 @@ export interface GetTaskRequest extends JSONRPCRequest {
   /**
    * Method name for getting task status.
    */
-  method: "tasks/get";
+  method: 'tasks/get';
   /**
    * Parameters for the get task method.
    */
@@ -904,7 +901,7 @@ export interface CancelTaskRequest extends JSONRPCRequest {
   /**
    * Method name for canceling a task.
    */
-  method: "tasks/cancel";
+  method: 'tasks/cancel';
   /**
    * Parameters for the cancel task method.
    */
@@ -918,7 +915,7 @@ export interface SetTaskPushNotificationRequest extends JSONRPCRequest {
   /**
    * Method name for setting a task notifications.
    */
-  method: "tasks/pushNotificationConfig/set";
+  method: 'tasks/pushNotificationConfig/set';
   /**
    * Parameters for the set task push notification method.
    */
@@ -932,7 +929,7 @@ export interface GetTaskPushNotificationRequest extends JSONRPCRequest {
   /**
    * Method name for getting task notification configuration.
    */
-  method: "tasks/pushNotificationConfig/get";
+  method: 'tasks/pushNotificationConfig/get';
   /**
    * Parameters for the get task push notification config method.
    */
@@ -946,7 +943,7 @@ export interface TaskResubscriptionRequest extends JSONRPCRequest {
   /**
    * Method name for resubscribing to task updates.
    */
-  method: "tasks/resubscribe";
+  method: 'tasks/resubscribe';
   /**
    * Parameters for the task resubscription method.
    */
@@ -960,7 +957,7 @@ export interface SendTaskStreamingRequest extends JSONRPCRequest {
   /**
    * Method name for sending a task message and subscribing to updates.
    */
-  method: "message/stream";
+  method: 'message/stream';
   /**
    * Parameters for the streaming task send method.
    */
@@ -1009,10 +1006,7 @@ export type CancelTaskResponse = JSONRPCResponse<Task | null, A2AError>;
 /**
  * Response to a `tasks/getHistory` request. Contains the TaskHistory object or an error.
  */
-export type GetTaskHistoryResponse = JSONRPCResponse<
-  TaskHistory | null,
-  A2AError
->;
+export type GetTaskHistoryResponse = JSONRPCResponse<TaskHistory | null, A2AError>;
 
 /**
  * Response to a `tasks/pushNotification/set` request. Contains the confirmed TaskPushNotificationConfig or an error.

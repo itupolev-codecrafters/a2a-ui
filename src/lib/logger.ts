@@ -39,4 +39,4 @@ export const createLogger = (context: string) => ({
   info: (message: string, ...args: any[]) => logger.info(`[${context}] ${message}`, ...args),
   warn: (message: string, ...args: any[]) => logger.warn(`[${context}] ${message}`, ...args),
   error: (message: string, ...args: any[]) => logger.error(`[${context}] ${message}`, ...args),
-}); 
+});
