@@ -28,7 +28,7 @@ services:
       - database_data:/var/lib/postgresql/data
 
   phoenix:
-    image: arizephoenix/phoenix:4.0.0
+    image: arizephoenix/phoenix:nightly
     ports:
       - "6006:6006"   # UI + HTTP OTLP collector
       - "4317:4317"   # gRPC OTLP collector
