@@ -4,10 +4,10 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '3001:3000'
+      - '80:3000'
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_APP_NAME=A2A UI
+      - NEXT_PUBLIC_APP_NAME=${FRONTEND_APP_NAME}
       - NEXT_PUBLIC_APP_VERSION=1.0.0
     restart: unless-stopped
     healthcheck:
@@ -21,9 +21,9 @@ services:
     image: postgres:17-alpine
     restart: always
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-postgres}
     volumes:
       - database_data:/var/lib/postgresql/data
 
@@ -35,7 +35,7 @@ services:
     depends_on:
       - db
     environment:
-      - PHOENIX_SQL_DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
+      - PHOENIX_SQL_DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
 
 volumes:
   phoenix_data:

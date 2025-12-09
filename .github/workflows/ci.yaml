@@ -23,6 +23,17 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "mkdir -p ${{ secrets.DOCKER_COMPOSE_PATH }}"
           rsync -avz --exclude '.git' ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DOCKER_COMPOSE_PATH }}
 
+      - name: Generate .env on server
+        run: bash .github/workflows/env-generation.sh
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          DOCKER_COMPOSE_PATH: ${{ secrets.DOCKER_COMPOSE_PATH }}
+          FRONTEND_APP_NAME: ${{ secrets.FRONTEND_APP_NAME }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+
       - name: Deploy with Docker Compose
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
