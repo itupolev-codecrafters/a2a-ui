@@ -23,8 +23,8 @@ export const useChat = ({ agentUrl, isStreamingEnabled = false, contextId }: Use
     {
       id: 1,
       sender: 'agent',
-      content: 'Спросите что-нибудь у агента',
-      senderName: 'Assistant',
+      content: 'Привет! Чем могу помочь?',
+      senderName: 'Ассистент',
       timestamp: new Date(),
     },
   ]);
@@ -318,7 +318,7 @@ export const useChat = ({ agentUrl, isStreamingEnabled = false, contextId }: Use
             id: prev.length + 1,
             sender: 'agent',
             content: '', // Начинаем с пустого контента
-            senderName: 'Assistant',
+            senderName: 'Ассистент',
             timestamp: new Date(),
             artifacts: [],
             parts: [],
@@ -528,7 +528,7 @@ export const useChat = ({ agentUrl, isStreamingEnabled = false, contextId }: Use
               id: prev.length + 1,
               sender: 'agent',
               content: syncResponse.text,
-              senderName: 'Assistant',
+              senderName: 'Ассистент',
               timestamp: new Date(),
               artifacts: syncResponse.artifacts.length > 0 ? syncResponse.artifacts : undefined,
               parts: syncResponse.parts.length > 0 ? syncResponse.parts : undefined,
@@ -544,7 +544,7 @@ export const useChat = ({ agentUrl, isStreamingEnabled = false, contextId }: Use
             id: prev.length + 1,
             sender: 'agent',
             content: `Error: ${error instanceof Error ? error.message : String(error)}`,
-            senderName: 'Assistant',
+            senderName: 'Ассистент',
             timestamp: new Date(),
           };
           return [...prev, errorMessage];

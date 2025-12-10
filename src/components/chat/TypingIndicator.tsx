@@ -4,7 +4,7 @@ export const TypingIndicator: React.FC = () => {
   return (
     <div className="mb-4 flex flex-col items-start">
       {/* Sender name */}
-      <div className="text-xs text-muted-foreground mb-1 px-2 text-left">Assistant</div>
+      <div className="text-xs text-muted-foreground mb-1 px-2 text-left">Ассистент</div>
 
       {/* Loading bubble */}
       <div className="relative max-w-[70%] px-4 py-3 rounded-2xl bg-muted text-foreground rounded-bl-md">
