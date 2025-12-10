@@ -34,7 +34,7 @@ jobs:
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           API_USER: ${{ secrets.API_USER }}
-          ROTATE_SCHEDULE: $ {{ secrets.ROTATE_SCHEDULE }}
+          ROTATE_SCHEDULE: ${{ secrets.ROTATE_SCHEDULE }}
 
       - name: Deploy with Docker Compose
         run: |
